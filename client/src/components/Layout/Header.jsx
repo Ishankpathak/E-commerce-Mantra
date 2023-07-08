@@ -48,6 +48,16 @@ const Header = () => {
                 <NavLink
                   className="nav-link "
                   aria-current="page"
+                  to="/category"
+                  style={{ color: "white" }}
+                >
+                  Category
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link "
+                  aria-current="page"
                   to="/register"
                   style={{ color: "white" }}
                 >

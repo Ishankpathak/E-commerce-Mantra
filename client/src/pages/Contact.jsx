@@ -3,7 +3,7 @@ import Layout from "../components/Layout/Layout";
 
 const Contact = () => {
   return (
-    <Layout>
+    <Layout title={'Contact - Us'}>
       <div className="contact">
         <div>
           <img src="contact.webp" alt="" className="contact-image" />
@@ -15,14 +15,14 @@ const Contact = () => {
             For Any Query info about Product Feel Free to Call Anytime
           </span>
           <span>
-            <i class="fa-solid fa-message"></i>
+            <i className="fa-solid fa-message"></i>
             www.help@matra.com
           </span>
           <span>
-            <i class="fa-solid fa-phone"></i>012-3456657
+            <i className="fa-solid fa-phone"></i>012-3456657
           </span>
           <span>
-            <i class="fa-solid fa-headphones"></i>1800-0000-0000(Toll-Free)
+            <i className="fa-solid fa-headphones"></i>1800-0000-0000(Toll-Free)
           </span>
         </div>
       </div>

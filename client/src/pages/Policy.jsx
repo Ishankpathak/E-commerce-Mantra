@@ -3,7 +3,7 @@ import Layout from "../components/Layout/Layout";
 
 const Policy = () => {
   return (
-    <Layout>
+    <Layout title={'Policy'}>
       <div className="Privacy">
         <div style={{ marginTop: "1rem" }}>
           <img src="privacy.jpg" alt="" className="contact-image" />
