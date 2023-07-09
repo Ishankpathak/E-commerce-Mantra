@@ -70,19 +70,19 @@ font-family: 'Roboto', sans-serif; */
   width: 50vw;
 }
 /* Privacy */
-.Privacy{
+.Privacy {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 /* accordian */
-.accordion{
+.accordion {
   width: 50vw;
   margin-bottom: 1rem;
 }
 /* about info  */
-.about-info{
+.about-info {
   width: 50vw;
 }
 /* Page Not Found CSS */
@@ -93,24 +93,33 @@ font-family: 'Roboto', sans-serif; */
   align-items: center;
 }
 /* Register Page  */
-.register{
+.register {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh;
-  background-color: #EDF5E1;
+  height: 75vh;
+  background-color: #edf5e1;
 }
-.submit{
+.submit {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   /* width: 50vw; */
 }
-.submit button{
+.submit button {
   width: 30vw;
 }
+/* admin css */
+.list-group-item {
+  background-color: rgb(87, 126, 255);
+  color: white;
+  padding: 0.8rem;
+  margin: 2px;
+  border-radius: 10px;
+}
+
 @media screen and (max-width: 480px) {
   .Not-Found > img {
     width: 15rem;
@@ -118,13 +127,21 @@ font-family: 'Roboto', sans-serif; */
   .contact-image {
     width: 100vw;
   }
-  .accordion{
+  .accordion {
     width: 100vw;
   }
-  .about-info{
+  .about-info {
     width: 90vw;
   }
-  .submit button{
+  .submit button {
     width: 60vw;
+  }
+  .navbar-nav li {
+    margin-top: 10px;
+  }
+  .list-group-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
