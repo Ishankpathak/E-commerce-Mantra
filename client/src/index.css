@@ -43,7 +43,7 @@ font-family: 'Roboto', sans-serif; */
 .footer {
   color: white;
   background-color: black;
-  padding: 0.5rem;
+  padding: 0.5rem ;
   letter-spacing: 0.1rem;
 }
 .footer a {
@@ -115,10 +115,14 @@ font-family: 'Roboto', sans-serif; */
 .list-group-item {
   background-color: rgb(87, 126, 255);
   color: white;
-  padding: 0.8rem;
-  margin: 2px;
+  padding: 0.5rem;
   border-radius: 10px;
 }
+.product-link{
+  text-decoration: none !important;
+  color: black;
+}
+
 
 @media screen and (max-width: 480px) {
   .Not-Found > img {
@@ -139,9 +143,10 @@ font-family: 'Roboto', sans-serif; */
   .navbar-nav li {
     margin-top: 10px;
   }
-  .list-group-item{
+  .list-group-item {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+ 
 }

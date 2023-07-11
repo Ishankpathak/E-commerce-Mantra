@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const { option } = Select;
 
-const CreateProduct = () => {
+const UpdateProduct = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
@@ -71,13 +71,13 @@ const CreateProduct = () => {
     }
   };
   return (
-    <Layout title={"Create-Product"}>
+    <Layout title={"Update-Product"}>
       <div className="row">
         <div className="col-md-3">
           <AdminMenu />
         </div>
         <div className="col-md-9">
-          <h1>Create Product</h1>
+          <h1>Update Product</h1>
           <div className="m-1 w-75 create-product">
             <Select
               bordered={false}
@@ -166,7 +166,7 @@ const CreateProduct = () => {
             </div>
             <div className="mb-3">
               <button className="btn btn-primary" onClick={handleCreate}>
-                CREATE PRODUCT
+                UPDATE PRODUCT
               </button>
             </div>
           </div>
@@ -176,4 +176,4 @@ const CreateProduct = () => {
   );
 };
 
-export default CreateProduct;
+export default UpdateProduct;
