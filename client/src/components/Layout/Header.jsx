@@ -6,14 +6,18 @@ import Swal from "sweetalert2";
 const Header = () => {
   const Swal = require("sweetalert2");
   const [auth, setAuth] = useAuth();
+
   const handleLogout = () => {
-    setAuth({
-      ...auth,
-      user: null,
-      token: "",
-    });
-    localStorage.removeItem("auth");
-    Swal("Logout Successfully");
+   const answer = window.confirm("Are you sure you want to log out?");
+    if (answer) {
+      setAuth({
+        ...auth,
+        user: null,
+        token: "",
+      });
+      localStorage.removeItem("auth");
+      alert("Logout Successfully");
+    }
   };
   return (
     <div>

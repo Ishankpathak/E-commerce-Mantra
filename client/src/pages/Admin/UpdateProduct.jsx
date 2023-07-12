@@ -4,13 +4,12 @@ import AdminMenu from "../../components/Layout/AdminMenu";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { Select } from "antd";
-import { Option } from "antd/es/mentions";
-import { useNavigate } from "react-router-dom";
-
-const { option } = Select;
+import { useNavigate, useParams } from "react-router-dom";
+const { Option } = Select;
 
 const UpdateProduct = () => {
   const navigate = useNavigate();
+  const params = useParams();
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -19,8 +18,30 @@ const UpdateProduct = () => {
   const [quantity, setQuantity] = useState("");
   const [shipping, setShipping] = useState("");
   const [photo, setPhoto] = useState("");
+  const [id, setId] = useState("");
 
-  //get all category
+  //get single product
+  const getSingleProduct = async () => {
+    try {
+      const { data } = await axios.get(
+        `/api/v1/product/get-product/${params.slug}`
+      );
+      setName(data.product.name);
+      setId(data.product._id);
+      setDescription(data.product.description);
+      setPrice(data.product.price);
+      setQuantity(data.product.quantity);
+      setShipping(data.product.shipping);
+      setCategory(data.product.category._id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getSingleProduct();
+    //eslint-disable-next-line
+  }, []);
 
   //get all category
   const getAllCategory = async () => {
@@ -44,7 +65,7 @@ const UpdateProduct = () => {
   }, []);
 
   //create product function
-  const handleCreate = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     try {
       const productData = new FormData();
@@ -52,22 +73,35 @@ const UpdateProduct = () => {
       productData.append("description", description);
       productData.append("price", price);
       productData.append("quantity", quantity);
-      productData.append("photo", photo);
+      photo && productData.append("photo", photo);
       productData.append("category", category);
 
-      const { data } = await axios.post(
-        `/api/v1/product/create-product`,
+      const { data } = await axios.put(
+        `/api/v1/product/update-product/${id}`,
         productData
       );
       if (data?.success) {
-        Swal.fire("Product Created Successfully");
+        Swal.fire("Product Updated Successfully");
         navigate("/dashboard/admin/products");
       } else {
         Swal.fire(data?.message);
       }
     } catch (error) {
       console.log(error);
-      Swal.fire("Something went wrong in creating product");
+      Swal.fire("Something went wrong in Updating product");
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      let answer = window.confirm("Are you sure want to delete this product");
+      if (!answer) return;
+      const { data } = await axios.delete(`/api/v1/product/product/${id}`);
+      Swal.fire("Product Deleted");
+      navigate("/dashboard/admin/products");
+    } catch (error) {
+      console.log(error);
+      Swal.fire("Something went wrong");
     }
   };
   return (
@@ -88,6 +122,7 @@ const UpdateProduct = () => {
               onChange={(value) => {
                 setCategory(value);
               }}
+              value={category}
             >
               {categories?.map((c) => (
                 <Option key={c._id} value={c._id}>
@@ -109,10 +144,19 @@ const UpdateProduct = () => {
               </label>
             </div>
             <div className="mb-3">
-              {photo && (
+              {photo ? (
                 <div className="text-center">
                   <img
                     src={URL.createObjectURL(photo)}
+                    alt="product_photo"
+                    height={"200px"}
+                    className="img img-responsive"
+                  />
+                </div>
+              ) : (
+                <div className="text-center">
+                  <img
+                    src={`/api/v1/product/product-photo/${id}`}
                     alt="product_photo"
                     height={"200px"}
                     className="img img-responsive"
@@ -156,17 +200,23 @@ const UpdateProduct = () => {
                 placeholder="Select Shipping"
                 size="large"
                 showSearch
-                className={(value) => {
+                onChange={(value) => {
                   setShipping(value);
                 }}
+                value={shipping ? "Yes" : "No"}
               >
                 <Select.Option value="0">No</Select.Option>
                 <Select.Option value="1">Yes</Select.Option>
               </Select>
             </div>
             <div className="mb-3">
-              <button className="btn btn-primary" onClick={handleCreate}>
+              <button className="btn btn-primary" onClick={handleUpdate}>
                 UPDATE PRODUCT
+              </button>
+            </div>
+            <div className="mb-3">
+              <button className="btn btn-danger" onClick={handleDelete}>
+                DELETE PRODUCT
               </button>
             </div>
           </div>

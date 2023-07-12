@@ -27,7 +27,7 @@ const Login = () => {
         password,
       });
       if (res && res.data.success) {
-        Swal.alert(res.data.message);
+        Swal.fire(res.data.message);
         setAuth({
           ...auth,
           user: res.data.user,

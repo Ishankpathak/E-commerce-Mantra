@@ -4,10 +4,10 @@ import AdminMenu from "../../components/Layout/AdminMenu";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { Select } from "antd";
-import { Option } from "antd/es/mentions";
+
 import { useNavigate } from "react-router-dom";
 
-const { option } = Select;
+const { Option } = Select;
 
 const CreateProduct = () => {
   const navigate = useNavigate();
@@ -19,8 +19,6 @@ const CreateProduct = () => {
   const [quantity, setQuantity] = useState("");
   const [shipping, setShipping] = useState("");
   const [photo, setPhoto] = useState("");
-
-  //get all category
 
   //get all category
   const getAllCategory = async () => {
@@ -60,10 +58,10 @@ const CreateProduct = () => {
         productData
       );
       if (data?.success) {
+        Swal.fire(data?.message);
+      } else {
         Swal.fire("Product Created Successfully");
         navigate("/dashboard/admin/products");
-      } else {
-        Swal.fire(data?.message);
       }
     } catch (error) {
       console.log(error);
@@ -128,7 +126,7 @@ const CreateProduct = () => {
                 className="form-control mb-2"
                 onChange={(e) => setName(e.target.value)}
               />
-              <input
+              <textarea
                 type="text"
                 value={description}
                 placeholder="Write a description"
@@ -136,14 +134,14 @@ const CreateProduct = () => {
                 onChange={(e) => setDescription(e.target.value)}
               />
               <input
-                type="text"
+                type="number"
                 value={price}
                 placeholder="Write a price"
                 className="form-control mb-2"
                 onChange={(e) => setPrice(e.target.value)}
               />
               <input
-                type="text"
+                type="number"
                 value={quantity}
                 placeholder="Write a quantity"
                 className="form-control mb-2"
