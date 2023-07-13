@@ -2,13 +2,15 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import Swal from "sweetalert2";
+import Search from "antd/es/transfer/search";
+import SearchInput from "../Form/SearchInput";
 
 const Header = () => {
   const Swal = require("sweetalert2");
   const [auth, setAuth] = useAuth();
 
   const handleLogout = () => {
-   const answer = window.confirm("Are you sure you want to log out?");
+    const answer = window.confirm("Are you sure you want to log out?");
     if (answer) {
       setAuth({
         ...auth,
@@ -51,6 +53,7 @@ const Header = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              <SearchInput />
               <li className="nav-item">
                 <NavLink
                   className="nav-link "
