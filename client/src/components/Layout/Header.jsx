@@ -2,12 +2,14 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import Swal from "sweetalert2";
-import Search from "antd/es/transfer/search";
 import SearchInput from "../Form/SearchInput";
+import useCategory from "../../hooks/useCategory";
+import { useCart } from "../../context/Cart";
 
 const Header = () => {
-  const Swal = require("sweetalert2");
   const [auth, setAuth] = useAuth();
+  const [cart] = useCart();
+  const categories = useCategory();
 
   const handleLogout = () => {
     const answer = window.confirm("Are you sure you want to log out?");
@@ -18,13 +20,13 @@ const Header = () => {
         token: "",
       });
       localStorage.removeItem("auth");
-      alert("Logout Successfully");
+      Swal.fire("Logout Successfully");
     }
   };
   return (
     <div>
       <nav className="navbar navbar-expand-lg text-light ">
-        <div className="container-fluid ">
+        <div className="container-fluid text-light">
           <Link className="navbar-brand" to="/">
             <span style={{ color: "white" }}>
               <svg
@@ -64,16 +66,36 @@ const Header = () => {
                   Home
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink
-                  className="nav-link "
-                  aria-current="page"
-                  to="/category"
-                  style={{ color: "white" }}
+
+              <li className="nav-item dropdown">
+                <Link
+                  className="nav-item dropdown-toggle categories-header"
+                  to={"/categories"}
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
                 >
-                  Category
-                </NavLink>
+                  Categories
+                </Link>
+                <ul className="dropdown-menu">
+                  <li>
+                    <Link className="dropdown-item" to={"/categories"}>
+                      All Categories
+                    </Link>
+                  </li>
+                  {categories.map((c) => (
+                    <li >
+                      <Link
+                        className="dropdown-item "
+                        to={`/category/${c.slug}`}
+                      >
+                        <button className="bg-primary text-light p-1 "> {c.name}</button>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </li>
+
               {!auth.user ? (
                 <>
                   <li className="nav-item">
@@ -142,7 +164,7 @@ const Header = () => {
                   to="/cart"
                   style={{ color: "white" }}
                 >
-                  Cart (0)
+                  Cart {cart?.length}
                 </NavLink>
               </li>
             </ul>

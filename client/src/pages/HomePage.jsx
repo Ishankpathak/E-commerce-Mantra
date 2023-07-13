@@ -5,6 +5,7 @@ import { Checkbox, Radio } from "antd";
 import Swal from "sweetalert2";
 import { Prices } from "../components/Prices.js";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/Cart";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -15,6 +16,7 @@ const HomePage = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
+  const [cart, setCart] = useCart();
   const navigate = useNavigate();
 
   //get all category
@@ -185,7 +187,17 @@ const HomePage = () => {
                     >
                       More Details
                     </button>
-                    <button className="btn btn-warning ms-1">
+                    <button
+                      className="btn btn-warning ms-1"
+                      onClick={() => {
+                        setCart([...cart, p]);
+                        localStorage.setItem(
+                          "cart",
+                          JSON.stringify([...cart, p])
+                        );
+                        Swal.fire("Added To Cart");
+                      }}
+                    >
                       Add to cart
                     </button>
                   </div>
