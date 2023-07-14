@@ -26,7 +26,7 @@ const HomePage = () => {
       if (data?.success) {
         setCategories(data?.category);
       }
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -152,7 +152,7 @@ const HomePage = () => {
           <h1 className="text-center" style={{ textDecoration: "underline" }}>
             Products
           </h1>
-          <div className="d-flex  flex-wrap justify-content-center">
+          <div className="d-flex  flex-wrap justify-content-center ">
             {products?.map((p) => (
               <div
                 key={p._id}
@@ -160,9 +160,12 @@ const HomePage = () => {
                 className="product-link"
               >
                 <div
-                  className="card m-3"
+                  className="card m-3 product-card"
                   style={{
                     width: "17rem",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
                   <img
@@ -180,7 +183,7 @@ const HomePage = () => {
                     <p className="card-text">
                       {p.description.substring(0, 60)}
                     </p>
-                    <p className="card-text">₹{p.price}</p>
+                    <p className="card-text text-primary">₹{p.price}</p>
                     <button
                       className="btn btn-primary ms-1"
                       onClick={() => navigate(`/product/${p.slug}`)}
