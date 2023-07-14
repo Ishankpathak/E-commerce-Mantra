@@ -22,6 +22,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev")); // to see api request in console
+app.use(express.static(path.join(__dirname, "./client/build")));
 
 //routes
 app.use("/api/v1/auth", authRoutes);
@@ -34,12 +35,13 @@ app.get("/", (req, res) => {
   res.send("<h1>Welcome to Mern - Ecom app</h1>");
 });
 
-//static files
-// app.use(express.static(path.join(__dirname, "./client/build")));
-app.use(express.static(path.dirname(new URL(import.meta.url).pathname) + "/client/build"));
+app.use(
+  express.static(
+    path.dirname(new URL(import.meta.url).pathname) + "/client/build"
+  )
+);
 
-
-app.get("*", function (req, res) {
+app.use("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
