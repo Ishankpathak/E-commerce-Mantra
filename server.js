@@ -7,6 +7,7 @@ import authRoutes from "./routes/authRoute.js";
 import categoryRoute from "./routes/CategoryRoutes.js";
 import productRoutes from "./routes/ProductRoutes.js";
 import cors from "cors";
+import path from "path";
 
 //config env
 dotenv.config();
@@ -31,6 +32,13 @@ app.use("/api/v1/product", productRoutes);
 app.get("/", (req, res) => {
   //localhost : 8080
   res.send("<h1>Welcome to Mern - Ecom app</h1>");
+});
+
+//static files
+app.use(express.static(path.join(__dirname, "./client/build")));
+
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 const PORT = process.env.PORT || 8080;
