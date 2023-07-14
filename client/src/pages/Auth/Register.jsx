@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout/Layout";
 import { useState, useEffect } from "react";
-import { useAsyncError, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -13,8 +13,7 @@ const Register = () => {
   const [address, setAddress] = useState("");
   const [answer, setAnswer] = useState("");
   const navigate = useNavigate();
-  const Swal = require("sweetalert2");
-
+ 
   //Form function
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +24,7 @@ const Register = () => {
         password,
         phone,
         address,
-        answer
+        answer,
       });
       if (res && res.data.success) {
         Swal.fire(res.data.message);
@@ -39,7 +38,7 @@ const Register = () => {
     }
   };
   return (
-    <Layout title="Register">
+    <Layout title="Register-Mantra">
       <div className="register">
         <div
           style={{
